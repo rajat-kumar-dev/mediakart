@@ -1,0 +1,82 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body {
+  height: 800vh;
+  --scroll: 0;
+}
+.content {
+  position: fixed;
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.text {
+  background-color: grey;
+  padding: 10px;
+  border-radius: 50%;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  scale: calc(var(--scroll) * 8);
+  aspect-ratio: 1;
+}
+.ad-container {
+  --ad-height: 15vh;
+  position: fixed;
+  inset: auto 0 0;
+  height: var(--ad-height);
+}
+.car {
+  --car-width: calc(var(--ad-height) - 0px);
+  --car-left: var(--scroll) * 100%;
+  height: 100%;
+  aspect-ratio: 1;
+  translate: -100% 0;
+  animation: slideIn 1s 0.5s ease-out forwards;
+  position: relative;
+  left: calc(var(--car-left) - min(var(--car-left), var(--car-width)));
+}
+.car .car-img {
+  height: 100%;
+  width: 100%;
+}
+
+.car .wheel {
+  position: absolute;
+  aspect-ratio: 1;
+  width: 12%;
+  transform: rotate(calc(var(--scroll) * 100 * 25deg));
+  animation: rollIn 1s 0.5s ease-out forwards;
+}
+.car .wheel.wl {
+  left: 15.2%;
+  top: 53%;
+}
+.car .wheel.wr {
+  right: 13%;
+  top: 53.5%;
+}
+
+@keyframes slideIn {
+  0% {
+    translate: -100% 0;
+  }
+  100% {
+    translate: 0 0;
+  }
+}
+@keyframes rollIn {
+  0% {
+    rotate: 0deg;
+  }
+  100% {
+    rotate: 360deg;
+  }
+}

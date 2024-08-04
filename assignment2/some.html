@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <style>
+      * {
+        margin: 0;
+      }
+      #box {
+        width: 50%;
+        height: auto;
+        overflow: hidden;
+        cursor: crosshair;
+      }
+      #box img {
+        height: 100%;
+        width: 100%;
+        object-fit: cover;
+        opacity: 0.8;
+        transition: scale 0.2s ease;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="box">
+      <img id="myimg" src="./processorimage.webp" />
+    </div>
+    <div id="op"></div>
+  </body>
+  <script>
+    const box = document.getElementById('box');
+    const op = document.getElementById('op');
+    const img = document.getElementById('myimg');
+    box.addEventListener('mousemove', (e) => {
+      op.textContent = `${e.clientX}, ${e.clientY}`;
+      img.style.transformOrigin = `${e.clientX}px ${e.clientY}px`;
+    });
+    box.addEventListener('mouseover', (e) => {
+      img.style.scale = `1.6 1.6`;
+    });
+    box.addEventListener('mouseout', (e) => {
+      img.style.scale = `1 1`;
+      setTimeout(() => {
+        img.style.transformOrigin = `50% 50%`;
+      }, 150);
+    });
+  </script>
+</html>

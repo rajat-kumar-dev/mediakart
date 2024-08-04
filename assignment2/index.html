@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+      }
+      .img-container {
+        --imageHeight: 100vh;
+        --imageWidth: 100vw;
+        height: var(--imageHeight);
+        width: var(--imageWidth);
+        position: relative;
+        overflow: hidden;
+      }
+
+      .img-container .image {
+        height: var(--imageHeight);
+        width: var(--imageWidth);
+        object-fit: cover;
+      }
+      .mglass {
+        outline: 1px solid white;
+        position: absolute;
+        width: 200px;
+        aspect-ratio: 1;
+
+        top: var(--my);
+        left: var(--mx);
+        overflow: hidden;
+        transition: opacity 0.2s ease;
+        border-radius: 50%;
+      }
+      .mglass .mimage {
+        height: var(--imageHeight);
+        width: var(--imageWidth);
+        object-fit: cover;
+        transition: scale 0.5s ease;
+        translate: calc(var(--mx) * -1) calc(var(--my) * -1);
+        scale: 1.7 1.7;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="img-container">
+      <img class="image" src="./image.webp" />
+      <div class="mglass">
+        <img class="mimage" src="./image.webp" />
+      </div>
+    </div>
+    <script>
+      const container = document.querySelector('.img-container');
+      const mglass = document.querySelector('.mglass');
+      const mimage = document.querySelector('.mimage');
+
+      const glassWidth = mglass.getBoundingClientRect().width;
+
+      const img = document.getElementById('myimg');
+      container.addEventListener('mousemove', (e) => {
+        mimage.style.transformOrigin = `${e.clientX}px ${e.clientY}px`;
+        container.style.setProperty('--mx', `${e.clientX - glassWidth / 2}px`);
+        container.style.setProperty('--my', `${e.clientY - glassWidth / 2}px`);
+      });
+
+      container.addEventListener('mouseover', (e) => {
+        mglass.style.opacity = 1;
+      });
+
+      container.addEventListener('mouseout', (e) => {
+        mglass.style.opacity = 0;
+      });
+    </script>
+  </body>
+</html>
